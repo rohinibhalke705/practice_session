@@ -2,20 +2,20 @@ pipeline {
     agent any
 
     environment {
-      DOCKERHUB_CREDENTIALS='docker_credential_c2'
-      IMAGE_NAME = 'rohi367/new_docker_image'
+      DOCKERHUB_CREDENTIALS='Docker_hub_image'
+      IMAGE_NAME = 'rohi367/new_docker_image_1'
       }
 
     stages {
 
         stage('Build java application') {
             steps {
-                bat 'javac Helloworld.java'
+                bat 'javac Main.java'
             }
         }
       stage('Run java program') {
             steps {
-                bat 'java Helloworld'
+                bat 'java Main'
             }
         }
 
@@ -30,7 +30,7 @@ pipeline {
         stage('Login to DockerHub') {
             steps {
                 withCredentials([usernamePassword(
-                    credentialsId: 'docker_credential_c2',
+                    credentialsId: 'Docker_hub_image',
                     usernameVariable: 'USER',
                     passwordVariable: 'PASS'
                 )]) {
